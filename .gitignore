@@ -1,0 +1,5 @@
+.idea/
+__pycache__/
+access_data.py
+credentials.json
+logs.txt
