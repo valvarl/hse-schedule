@@ -38,7 +38,7 @@ class ScheduleChecker(threading.Thread):
                 logs('Error:\n' + traceback.format_exc())
                 sleep(10)
                 continue
-            sleep(200)
+            sleep(270)
 
 
 def schedule_broadcast():
