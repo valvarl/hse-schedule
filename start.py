@@ -9,7 +9,7 @@ from pprint import pprint
 import threading
 
 import httplib2
-import apiclient
+from googleapiclient import discovery
 from oauth2client.service_account import ServiceAccountCredentials
 
 import requests
@@ -94,7 +94,7 @@ def get_table():
         ['https://www.googleapis.com/auth/spreadsheets',
          'https://www.googleapis.com/auth/drive'])
     httpAuth = credentials.authorize(httplib2.Http())
-    service = apiclient.discovery.build('sheets', 'v4', http=httpAuth)
+    service = discovery.build('sheets', 'v4', http=httpAuth)
 
     values = service.spreadsheets().values().get(
         spreadsheetId=spreadsheet_id,
