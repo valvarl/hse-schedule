@@ -31,14 +31,21 @@ class ScheduleChecker(threading.Thread):
         threading.Thread.__init__(self)
 
     def run(self):
+        now = datetime.utcnow() + timedelta(hours=3)
+        previous_minute = now.minute
         while True:
-            try:
-                schedule_broadcast()
-            except Exception as e:
-                logs('Error:\n' + traceback.format_exc())
-                sleep(10)
-                continue
-            sleep(270)
+            now = datetime.utcnow() + timedelta(hours=3)
+            if now.minute != previous_minute and now.minute % 5 != 0:
+                try:
+                    schedule_broadcast()
+                except Exception as e:
+                    logs('Error:\n' + traceback.format_exc())
+                    sleep(2)
+                    continue
+                previous_minute = now.minute
+                sleep(240)
+            else:
+                sleep(60)
 
 
 def schedule_broadcast():
